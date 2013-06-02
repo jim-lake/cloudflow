@@ -9,6 +9,7 @@
     "express": "3.2.5",
     "jshtml-express": "*",
     "less-middleware": "*",
-    "aws-sdk": "*"
+    "aws-sdk": "*",
+    "mysql": "*"
   }
 }
