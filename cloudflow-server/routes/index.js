@@ -3,11 +3,12 @@
  * GET home page.
  */
 
-exports.index = function(req, res){
-    res.locals({
-        title : 'Test!'
-        , message : 'De groeten'
-    });
+exports.index = function(req, res)
+{
+    res.redirect('/home');
+};
 
-    res.render('index');
+exports.home = function(req,res)
+{
+    res.render('home');
 };

@@ -9,12 +9,15 @@
 /* Begin PBXFileReference section */
 		2DE6CDDA175BA7A9007E6792 /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		2DE6D0DA175BA7AA007E6792 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
-		2DE6D0E4175BA7AA007E6792 /* index.jshtml */ = {isa = PBXFileReference; lastKnownFileType = text; path = index.jshtml; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
-		2DE6D0E5175BA7AA007E6792 /* layout.jshtml */ = {isa = PBXFileReference; lastKnownFileType = text; path = layout.jshtml; sourceTree = "<group>"; };
-		2DE6D0EA175BB8A2007E6792 /* style.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = style.less; sourceTree = "<group>"; };
+		2DE6D0E4175BA7AA007E6792 /* home.jshtml */ = {isa = PBXFileReference; lastKnownFileType = text; path = home.jshtml; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
+		2DE6D0EA175BB8A2007E6792 /* home.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = home.less; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.css; };
 		2DE6D0F0175BB8BF007E6792 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		2DE6D0F4175BBA38007E6792 /* applications.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = applications.js; sourceTree = "<group>"; };
 		2DE6D0F5175BBA38007E6792 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		2DE6D0F6175BBF06007E6792 /* default_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = default_config.json; sourceTree = "<group>"; };
+		2DE6D0F7175BC49D007E6792 /* db.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = db.js; sourceTree = "<group>"; };
+		2DE6D0F8175BE5F3007E6792 /* string.utils.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = string.utils.js; sourceTree = "<group>"; };
+		2DE6D0F9175BE60E007E6792 /* home.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = home.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -29,7 +32,9 @@
 			isa = PBXGroup;
 			children = (
 				2DE6CDDA175BA7A9007E6792 /* app.js */,
+				2DE6D0F7175BC49D007E6792 /* db.js */,
 				2DE6D0DA175BA7AA007E6792 /* package.json */,
+				2DE6D0F6175BBF06007E6792 /* default_config.json */,
 				2DE6D0ED175BB8BF007E6792 /* routes */,
 				2DE6D0E3175BA7AA007E6792 /* views */,
 				2DE6D0E8175BB8A2007E6792 /* static */,
@@ -41,8 +46,7 @@
 		2DE6D0E3175BA7AA007E6792 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				2DE6D0E4175BA7AA007E6792 /* index.jshtml */,
-				2DE6D0E5175BA7AA007E6792 /* layout.jshtml */,
+				2DE6D0E4175BA7AA007E6792 /* home.jshtml */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -60,7 +64,7 @@
 		2DE6D0E9175BB8A2007E6792 /* css */ = {
 			isa = PBXGroup;
 			children = (
-				2DE6D0EA175BB8A2007E6792 /* style.less */,
+				2DE6D0EA175BB8A2007E6792 /* home.less */,
 			);
 			path = css;
 			sourceTree = "<group>";
@@ -75,6 +79,8 @@
 		2DE6D0EC175BB8A2007E6792 /* js */ = {
 			isa = PBXGroup;
 			children = (
+				2DE6D0F8175BE5F3007E6792 /* string.utils.js */,
+				2DE6D0F9175BE60E007E6792 /* home.js */,
 			);
 			path = js;
 			sourceTree = "<group>";
@@ -91,8 +97,8 @@
 		2DE6D0F3175BBA38007E6792 /* api */ = {
 			isa = PBXGroup;
 			children = (
-				2DE6D0F4175BBA38007E6792 /* applications.js */,
 				2DE6D0F5175BBA38007E6792 /* index.js */,
+				2DE6D0F4175BBA38007E6792 /* applications.js */,
 			);
 			path = api;
 			sourceTree = "<group>";
