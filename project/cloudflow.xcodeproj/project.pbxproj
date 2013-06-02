@@ -1,0 +1,151 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		2DE6CDDA175BA7A9007E6792 /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
+		2DE6D0DA175BA7AA007E6792 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
+		2DE6D0E4175BA7AA007E6792 /* index.jshtml */ = {isa = PBXFileReference; lastKnownFileType = text; path = index.jshtml; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
+		2DE6D0E5175BA7AA007E6792 /* layout.jshtml */ = {isa = PBXFileReference; lastKnownFileType = text; path = layout.jshtml; sourceTree = "<group>"; };
+		2DE6D0EA175BB8A2007E6792 /* style.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = style.less; sourceTree = "<group>"; };
+		2DE6D0F0175BB8BF007E6792 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		2DE6D0F4175BBA38007E6792 /* applications.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = applications.js; sourceTree = "<group>"; };
+		2DE6D0F5175BBA38007E6792 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		2DE6CDD2175BA6E9007E6792 = {
+			isa = PBXGroup;
+			children = (
+				2DE6CDD9175BA7A9007E6792 /* cloudflow-server */,
+			);
+			sourceTree = "<group>";
+		};
+		2DE6CDD9175BA7A9007E6792 /* cloudflow-server */ = {
+			isa = PBXGroup;
+			children = (
+				2DE6CDDA175BA7A9007E6792 /* app.js */,
+				2DE6D0DA175BA7AA007E6792 /* package.json */,
+				2DE6D0ED175BB8BF007E6792 /* routes */,
+				2DE6D0E3175BA7AA007E6792 /* views */,
+				2DE6D0E8175BB8A2007E6792 /* static */,
+			);
+			name = "cloudflow-server";
+			path = "../cloudflow-server";
+			sourceTree = "<group>";
+		};
+		2DE6D0E3175BA7AA007E6792 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				2DE6D0E4175BA7AA007E6792 /* index.jshtml */,
+				2DE6D0E5175BA7AA007E6792 /* layout.jshtml */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		2DE6D0E8175BB8A2007E6792 /* static */ = {
+			isa = PBXGroup;
+			children = (
+				2DE6D0E9175BB8A2007E6792 /* css */,
+				2DE6D0EB175BB8A2007E6792 /* images */,
+				2DE6D0EC175BB8A2007E6792 /* js */,
+			);
+			path = static;
+			sourceTree = "<group>";
+		};
+		2DE6D0E9175BB8A2007E6792 /* css */ = {
+			isa = PBXGroup;
+			children = (
+				2DE6D0EA175BB8A2007E6792 /* style.less */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		2DE6D0EB175BB8A2007E6792 /* images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		2DE6D0EC175BB8A2007E6792 /* js */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		2DE6D0ED175BB8BF007E6792 /* routes */ = {
+			isa = PBXGroup;
+			children = (
+				2DE6D0F3175BBA38007E6792 /* api */,
+				2DE6D0F0175BB8BF007E6792 /* index.js */,
+			);
+			path = routes;
+			sourceTree = "<group>";
+		};
+		2DE6D0F3175BBA38007E6792 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				2DE6D0F4175BBA38007E6792 /* applications.js */,
+				2DE6D0F5175BBA38007E6792 /* index.js */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		2DE6CDD3175BA6E9007E6792 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+			};
+			buildConfigurationList = 2DE6CDD6175BA6E9007E6792 /* Build configuration list for PBXProject "cloudflow" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2DE6CDD2175BA6E9007E6792;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		2DE6CDD7175BA6E9007E6792 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		2DE6CDD8175BA6E9007E6792 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2DE6CDD6175BA6E9007E6792 /* Build configuration list for PBXProject "cloudflow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2DE6CDD7175BA6E9007E6792 /* Debug */,
+				2DE6CDD8175BA6E9007E6792 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2DE6CDD3175BA6E9007E6792 /* Project object */;
+}
