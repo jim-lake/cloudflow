@@ -49,7 +49,10 @@ exports.get_app = function(req,res)
         }
         else
         {
-            connection.query("SELECT * FROM applications WHERE id=?",[id],function(err, rows)
+            var sql = "SELECT * FROM applications ";
+            //sql += " JOIN ";
+            sql += " WHERE application_id=? "
+            connection.query(sql,[id],function(err, rows)
             {
                 if( err )
                 {
