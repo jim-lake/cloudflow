@@ -9,16 +9,18 @@
 /* Begin PBXFileReference section */
 		2DE6CDDA175BA7A9007E6792 /* app.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		2DE6D0DA175BA7AA007E6792 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
-		2DE6D0E4175BA7AA007E6792 /* home.jshtml */ = {isa = PBXFileReference; lastKnownFileType = text; path = home.jshtml; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
+		2DE6D0E4175BA7AA007E6792 /* home.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = home.html; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
 		2DE6D0EA175BB8A2007E6792 /* home.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = home.less; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.css; };
 		2DE6D0F0175BB8BF007E6792 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
-		2DE6D0F4175BBA38007E6792 /* applications.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = applications.js; sourceTree = "<group>"; };
+		2DE6D0F4175BBA38007E6792 /* application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = application.js; sourceTree = "<group>"; };
 		2DE6D0F5175BBA38007E6792 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		2DE6D0F6175BBF06007E6792 /* default_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = default_config.json; sourceTree = "<group>"; };
 		2DE6D0F7175BC49D007E6792 /* db.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = db.js; sourceTree = "<group>"; };
 		2DE6D0F8175BE5F3007E6792 /* string.utils.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = string.utils.js; sourceTree = "<group>"; };
 		2DE6D0F9175BE60E007E6792 /* home.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = home.js; sourceTree = "<group>"; };
-		2DE6D0FA175C0D7C007E6792 /* environments.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = environments.js; sourceTree = "<group>"; };
+		2DE6D0FA175C0D7C007E6792 /* environment.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = environment.js; sourceTree = "<group>"; };
+		2DE6D0FB175C4104007E6792 /* environment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = environment.html; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
+		2DE6D0FC175C4576007E6792 /* application.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = application.html; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -47,7 +49,9 @@
 		2DE6D0E3175BA7AA007E6792 /* views */ = {
 			isa = PBXGroup;
 			children = (
-				2DE6D0E4175BA7AA007E6792 /* home.jshtml */,
+				2DE6D0E4175BA7AA007E6792 /* home.html */,
+				2DE6D0FB175C4104007E6792 /* environment.html */,
+				2DE6D0FC175C4576007E6792 /* application.html */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -99,8 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				2DE6D0F5175BBA38007E6792 /* index.js */,
-				2DE6D0F4175BBA38007E6792 /* applications.js */,
-				2DE6D0FA175C0D7C007E6792 /* environments.js */,
+				2DE6D0F4175BBA38007E6792 /* application.js */,
+				2DE6D0FA175C0D7C007E6792 /* environment.js */,
 			);
 			path = api;
 			sourceTree = "<group>";

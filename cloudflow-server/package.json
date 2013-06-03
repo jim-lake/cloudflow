@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "express": "3.2.5",
-    "jshtml-express": "*",
+    "ejs": "*",
     "less-middleware": "*",
     "aws-sdk": "*",
     "mysql": "*"

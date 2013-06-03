@@ -1,7 +1,7 @@
 
 var db_pool = require('../../db.js').db_pool;
 
-exports.get = function(req, res)
+exports.get_list = function(req, res)
 {
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
@@ -10,7 +10,7 @@ exports.get = function(req, res)
     {
         if( err )
         {
-            res.send("no db, try again later");
+            res.send("no db, try again later: " + err);
         }
         else
         {
@@ -30,7 +30,22 @@ exports.get = function(req, res)
     });
 };
 
-exports.post = function(req, res)
+exports.add_app = function(req, res)
 {
-    res.send("data appliactions post");
+    res.send("data applications post");
+};
+
+exports.get_app = function(req,res)
+{
+    res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header("Pragma", "no-cache");
+    
+    res.send("get app not implemented");
+}
+exports.update_app = function(req,res)
+{
+    res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header("Pragma", "no-cache");
+    
+    res.send("update app not implemented");
 };

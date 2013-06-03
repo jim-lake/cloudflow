@@ -7,20 +7,17 @@
      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     
-    <link href="/css/home.css" rel="stylesheet" type="text/css" />
+    <link href="/css/environment.css" rel="stylesheet" type="text/css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js" type="text/javascript"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
 
     <script src="/js/string.utils.js" type="text/javascript"></script>
-    <script src="/js/home.js" type="text/javascript"></script>
+    <script src="/js/environment.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var g_appId = <%= id %>;
+    </script>
 </head>
 <body>
-    <h1>Environments</h1>
-    <div class='environment_list'></div>
-    <button>New Environment</button>
-    <hr/>
-    <h1>Applications</h1>
-    <div class='application_list'></div>
-    <button>New Application</button>
+    <h1>Application: <%= id %></h1>
 </body>
 </html>
