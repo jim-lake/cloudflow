@@ -4,7 +4,7 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
+var pages = require('./routes/pages');
 var api = require('./routes/api');
 var http = require('http');
 var path = require('path');
@@ -35,11 +35,7 @@ if( app.get('env') == 'development' )
     app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/home', routes.home);
-app.get('/environment/:id',routes.environment);
-app.get('/application/:id',routes.application);
-
+pages.addRoutes(app,'');
 api.addRoutes(app,'/api');
 
 http.createServer(app).listen(app.get('port'), function(){

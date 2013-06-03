@@ -45,12 +45,12 @@ function renderIndex()
     {
         var env = g_environments[i];
     
-        html += "<div class='line'>";
+        html += "<div class='line'><div class='contents'>";
         html += " <div class='name'>{0}</div>".format(env.name);
         html += "  <div class='action view'>";
         html += "   <a href='/environment/{0}'>View</a>".format(env.id);
         html += "  </div>".format(name);
-        html += "</div>";
+        html += "</div></div>";
     }
     $('#environment_list').html(html);
 
@@ -60,12 +60,12 @@ function renderIndex()
     {
         var app = g_applications[i];
     
-        html += "<div class='line'>";
+        html += "<div class='line'><div class='contents'>";
         html += " <div class='name'>{0}</div>".format(app.name);
         html += "  <div class='action view'>";
         html += "   <a href='/application/{0}'>View</a>".format(app.id);
         html += "  </div>".format(name);
-        html += "</div>";
+        html += "</div></div>";
     }
     $('#application_list').html(html);
 }

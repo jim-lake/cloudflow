@@ -37,11 +37,41 @@ exports.add_app = function(req, res)
 
 exports.get_app = function(req,res)
 {
+    var id = req.params.id;
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
     
-    res.send("get app not implemented");
-}
+    db_pool.getConnection(function(err, connection)
+    {
+        if( err )
+        {
+            res.send("no db, try again later: " + err);
+        }
+        else
+        {
+            connection.query("SELECT * FROM applications WHERE id=?",[id],function(err, rows)
+            {
+                if( err )
+                {
+                    res.send(err);
+                }
+                else
+                {
+                    if( rows && rows.length > 0 )
+                    {
+                        res.send(rows[0]);
+                    }
+                    else
+                    {
+                        res.send("no app found");
+                    }
+                }
+                connection.end();
+            });
+        }
+    });
+};
+
 exports.update_app = function(req,res)
 {
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");

@@ -11,7 +11,6 @@
 		2DE6D0DA175BA7AA007E6792 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		2DE6D0E4175BA7AA007E6792 /* home.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = home.html; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
 		2DE6D0EA175BB8A2007E6792 /* home.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = home.less; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.css; };
-		2DE6D0F0175BB8BF007E6792 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		2DE6D0F4175BBA38007E6792 /* application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = application.js; sourceTree = "<group>"; };
 		2DE6D0F5175BBA38007E6792 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		2DE6D0F6175BBF06007E6792 /* default_config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = default_config.json; sourceTree = "<group>"; };
@@ -21,6 +20,11 @@
 		2DE6D0FA175C0D7C007E6792 /* environment.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = environment.js; sourceTree = "<group>"; };
 		2DE6D0FB175C4104007E6792 /* environment.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = environment.html; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
 		2DE6D0FC175C4576007E6792 /* application.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = application.html; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
+		2DE6D0FD175C645A007E6792 /* application.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = application.less; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.css; };
+		2DE6D0FE175C6463007E6792 /* environment.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = environment.less; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.css; };
+		2DE6D0FF175C6491007E6792 /* application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = application.js; sourceTree = "<group>"; };
+		2DE6D100175C649B007E6792 /* environment.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = environment.js; sourceTree = "<group>"; };
+		2DE6D102175CDFF4007E6792 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = index.js; path = pages/index.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -70,6 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				2DE6D0EA175BB8A2007E6792 /* home.less */,
+				2DE6D0FD175C645A007E6792 /* application.less */,
+				2DE6D0FE175C6463007E6792 /* environment.less */,
 			);
 			path = css;
 			sourceTree = "<group>";
@@ -86,6 +92,8 @@
 			children = (
 				2DE6D0F8175BE5F3007E6792 /* string.utils.js */,
 				2DE6D0F9175BE60E007E6792 /* home.js */,
+				2DE6D0FF175C6491007E6792 /* application.js */,
+				2DE6D100175C649B007E6792 /* environment.js */,
 			);
 			path = js;
 			sourceTree = "<group>";
@@ -94,7 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				2DE6D0F3175BBA38007E6792 /* api */,
-				2DE6D0F0175BB8BF007E6792 /* index.js */,
+				2DE6D101175CDED7007E6792 /* pages */,
 			);
 			path = routes;
 			sourceTree = "<group>";
@@ -107,6 +115,14 @@
 				2DE6D0FA175C0D7C007E6792 /* environment.js */,
 			);
 			path = api;
+			sourceTree = "<group>";
+		};
+		2DE6D101175CDED7007E6792 /* pages */ = {
+			isa = PBXGroup;
+			children = (
+				2DE6D102175CDFF4007E6792 /* index.js */,
+			);
+			name = pages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
