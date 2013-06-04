@@ -1,0 +1,11 @@
+
+<% for( var i = 0 ; i < envs.length ; ++i ) { %>
+    <div class='line'>
+        <div class='contents'>
+            <div class='name'><%= envs[i].name %></div>
+            <div class='action view'>
+                <a href="/environment/<%= envs[i].environment_id %>">View</a>
+            </div>
+        </div>
+    </div>
+<% } %>

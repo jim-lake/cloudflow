@@ -25,6 +25,12 @@
 		2DE6D0FF175C6491007E6792 /* application.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = application.js; sourceTree = "<group>"; };
 		2DE6D100175C649B007E6792 /* environment.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = environment.js; sourceTree = "<group>"; };
 		2DE6D102175CDFF4007E6792 /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = index.js; path = pages/index.js; sourceTree = "<group>"; };
+		2DE6D103175D76EB007E6792 /* app_version.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = app_version.html; sourceTree = "<group>"; };
+		2DE6D139175DA99D007E6792 /* app_list.ejs */ = {isa = PBXFileReference; lastKnownFileType = text; path = app_list.ejs; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
+		2DE6D13A175DAA67007E6792 /* env_list.ejs */ = {isa = PBXFileReference; lastKnownFileType = text; path = env_list.ejs; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
+		2DE6D13B175DAD75007E6792 /* app_ver_list.ejs */ = {isa = PBXFileReference; lastKnownFileType = text; path = app_ver_list.ejs; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.html; };
+		2DE6D13C175DB2C5007E6792 /* app_version.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = app_version.js; sourceTree = "<group>"; };
+		2DE6D13D175DB587007E6792 /* app_version.less */ = {isa = PBXFileReference; lastKnownFileType = text; path = app_version.less; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.css; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -56,6 +62,7 @@
 				2DE6D0E4175BA7AA007E6792 /* home.html */,
 				2DE6D0FB175C4104007E6792 /* environment.html */,
 				2DE6D0FC175C4576007E6792 /* application.html */,
+				2DE6D103175D76EB007E6792 /* app_version.html */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -63,6 +70,7 @@
 		2DE6D0E8175BB8A2007E6792 /* static */ = {
 			isa = PBXGroup;
 			children = (
+				2DE6D138175DA98D007E6792 /* templates */,
 				2DE6D0E9175BB8A2007E6792 /* css */,
 				2DE6D0EB175BB8A2007E6792 /* images */,
 				2DE6D0EC175BB8A2007E6792 /* js */,
@@ -76,6 +84,7 @@
 				2DE6D0EA175BB8A2007E6792 /* home.less */,
 				2DE6D0FD175C645A007E6792 /* application.less */,
 				2DE6D0FE175C6463007E6792 /* environment.less */,
+				2DE6D13D175DB587007E6792 /* app_version.less */,
 			);
 			path = css;
 			sourceTree = "<group>";
@@ -94,6 +103,7 @@
 				2DE6D0F9175BE60E007E6792 /* home.js */,
 				2DE6D0FF175C6491007E6792 /* application.js */,
 				2DE6D100175C649B007E6792 /* environment.js */,
+				2DE6D13C175DB2C5007E6792 /* app_version.js */,
 			);
 			path = js;
 			sourceTree = "<group>";
@@ -123,6 +133,16 @@
 				2DE6D102175CDFF4007E6792 /* index.js */,
 			);
 			name = pages;
+			sourceTree = "<group>";
+		};
+		2DE6D138175DA98D007E6792 /* templates */ = {
+			isa = PBXGroup;
+			children = (
+				2DE6D139175DA99D007E6792 /* app_list.ejs */,
+				2DE6D13A175DAA67007E6792 /* env_list.ejs */,
+				2DE6D13B175DAD75007E6792 /* app_ver_list.ejs */,
+			);
+			path = templates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

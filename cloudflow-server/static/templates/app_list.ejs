@@ -1,0 +1,11 @@
+
+<% for( var i = 0 ; i < apps.length ; ++i ) { %>
+    <div class='line'>
+        <div class='contents'>
+            <div class='name'><%= apps[i].name %></div>
+            <div class='action view'>
+                <a href="/application/<%= apps[i].application_id %>">View</a>
+            </div>
+        </div>
+    </div>
+<% } %>

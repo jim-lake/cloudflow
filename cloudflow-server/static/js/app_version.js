@@ -1,22 +1,18 @@
 
 var g_app = {};
 
-var g_ejs_app_ver_list = false;
-
 function appReady()
 {
-    g_ejs_app_ver_list = new EJS({ url: '/templates/app_ver_list.ejs' });
-
+    var url = "/api/application/{0}/ver/{1}".format(g_appId,g_appVersionId);
     jQuery.ajax(
     {
         type: 'GET',
-        url: '/api/application/' + g_appId,
+        url: url,
         dataType: 'json',
         success: function(data) 
         {
             g_app = data;
             $('#app_name').html(g_app.name);
-            g_ejs_app_ver_list.update('app_version_list',{ vers: g_app.versions });
         },
         error: function()
         {

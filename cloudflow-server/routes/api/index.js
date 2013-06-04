@@ -8,6 +8,8 @@ exports.addRoutes = function(app,prefix)
     app.post(prefix + '/application',api_app.add_app);
     app.get(prefix + '/application/:id',api_app.get_app);
     app.post(prefix + '/application/:id',api_app.update_app);
+    app.get(prefix + '/application/:id/ver/:ver_id',api_app.get_app_ver);
+    app.post(prefix + '/application/:id/ver/:ver_id',api_app.update_app_ver);
 
     app.get(prefix + '/environment',api_env.get_list);
     app.post(prefix + '/environment',api_env.add_env);

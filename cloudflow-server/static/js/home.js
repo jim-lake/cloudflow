@@ -2,8 +2,14 @@
 var g_applications = [];
 var g_environments = [];
 
+var g_ejs_app_list = false;
+var g_ejs_env_list = false;
+
 function indexReady()
 {
+    g_ejs_app_list = new EJS({ url: '/templates/app_list.ejs' });
+    g_ejs_env_list = new EJS({ url: '/templates/env_list.ejs' });
+
     jQuery.ajax(
     {
         type: 'GET',
@@ -12,7 +18,7 @@ function indexReady()
         success: function(data) 
         {
             g_applications = data;
-            renderIndex();
+            g_ejs_app_list.update('application_list',{ apps: data });
         },
         error: function()
         {
@@ -27,7 +33,7 @@ function indexReady()
         success: function(data) 
         {
             g_environments = data;
-            renderIndex();
+            g_ejs_env_list.update('environment_list',{ envs: data });
         },
         error: function()
         {
@@ -37,36 +43,4 @@ function indexReady()
 }
 $(document).ready(indexReady);
 
-function renderIndex()
-{
-    $('#environment_list').empty();
-    var html = "";
-    for( var i = 0 ; i < g_environments.length ; ++i )
-    {
-        var env = g_environments[i];
-    
-        html += "<div class='line'><div class='contents'>";
-        html += " <div class='name'>{0}</div>".format(env.name);
-        html += "  <div class='action view'>";
-        html += "   <a href='/environment/{0}'>View</a>".format(env.environment_id);
-        html += "  </div>".format(name);
-        html += "</div></div>";
-    }
-    $('#environment_list').html(html);
-
-    $('#application_list').empty();
-    var html = "";
-    for( var i = 0 ; i < g_applications.length ; ++i )
-    {
-        var app = g_applications[i];
-    
-        html += "<div class='line'><div class='contents'>";
-        html += " <div class='name'>{0}</div>".format(app.name);
-        html += "  <div class='action view'>";
-        html += "   <a href='/application/{0}'>View</a>".format(app.application_id);
-        html += "  </div>".format(name);
-        html += "</div></div>";
-    }
-    $('#application_list').html(html);
-}
 

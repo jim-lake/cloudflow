@@ -9,6 +9,7 @@ exports.addRoutes = function(app,prefix)
     app.get(prefix + '/home', home);
     app.get(prefix + '/environment/:id',environment);
     app.get(prefix + '/application/:id',application);
+    app.get(prefix + '/application/:id/ver/:ver_id',app_version);
 };
 
 function index(req, res)
@@ -28,4 +29,10 @@ function application(req,res)
 {
     res.locals.id = req.params.id;
     res.render('application');
+}
+function app_version(req,res)
+{
+    res.locals.application_id = req.params.id;
+    res.locals.app_version_id = req.params.ver_id;
+    res.render('app_version');
 }
