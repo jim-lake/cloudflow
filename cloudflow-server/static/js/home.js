@@ -48,7 +48,7 @@ function renderIndex()
         html += "<div class='line'><div class='contents'>";
         html += " <div class='name'>{0}</div>".format(env.name);
         html += "  <div class='action view'>";
-        html += "   <a href='/environment/{0}'>View</a>".format(env.id);
+        html += "   <a href='/environment/{0}'>View</a>".format(env.environment_id);
         html += "  </div>".format(name);
         html += "</div></div>";
     }
@@ -63,7 +63,7 @@ function renderIndex()
         html += "<div class='line'><div class='contents'>";
         html += " <div class='name'>{0}</div>".format(app.name);
         html += "  <div class='action view'>";
-        html += "   <a href='/application/{0}'>View</a>".format(app.id);
+        html += "   <a href='/application/{0}'>View</a>".format(app.application_id);
         html += "  </div>".format(name);
         html += "</div></div>";
     }
