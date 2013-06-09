@@ -15,7 +15,8 @@ function indexReady()
         type: 'GET',
         url: '/api/application',
         dataType: 'json',
-        success: function(data) 
+        cache: false,
+        success: function(data)
         {
             g_applications = data;
             g_ejs_app_list.update('application_list',{ apps: data });
@@ -30,6 +31,7 @@ function indexReady()
         type: 'GET',
         url: '/api/environment',
         dataType: 'json',
+        cache: false,
         success: function(data) 
         {
             g_environments = data;

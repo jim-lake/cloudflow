@@ -10,13 +10,17 @@ function appReady()
     jQuery.ajax(
     {
         type: 'GET',
-        url: '/api/application/' + g_appId,
+        url: '/api/application/' + g_app_id,
         dataType: 'json',
+        cache: false,
         success: function(data) 
         {
             g_app = data;
             $('#app_name').html(g_app.name);
-            g_ejs_app_ver_list.update('app_version_list',{ vers: g_app.versions });
+            var args = {
+                vers: g_app.versions
+            };
+            g_ejs_app_ver_list.update('app_version_list',args);
         },
         error: function()
         {

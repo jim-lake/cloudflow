@@ -26,13 +26,13 @@ exports.add_app = function(req, res)
 
 exports.get_app = function(req,res)
 {
-    var id = req.params.id;
+    var app_id = req.params.app_id;
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
     
     var sql = 'SELECT * FROM applications WHERE application_id = ?;';
     sql += 'SELECT * FROM app_versions WHERE application_id = ?';
-    db.queryFromPool(sql,[id,id],function(err,results)
+    db.queryFromPool(sql,[app_id,app_id],function(err,results)
     {
         if( err )
         {
@@ -65,14 +65,18 @@ exports.update_app = function(req,res)
 
 exports.get_app_ver = function(req,res)
 {
-    var id = req.params.id;
     var ver_id = req.params.ver_id;
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
     
-    var sql = 'SELECT * FROM applications WHERE application_id = ?;';
-    sql += 'SELECT * FROM app_versions WHERE app_version_id = ?;';
-    db.queryFromPool(sql,[id,ver_id],function(err,results)
+    var sql = 'SELECT * FROM app_versions NATURAL JOIN applications WHERE app_version_id = ?;';
+    sql += 'SELECT * FROM auto_scale_groups NATURAL LEFT JOIN launch_configs WHERE app_version_id = ?;';
+    
+    var options = {
+        sql: sql,
+        nestTables: false,
+    };
+    db.queryFromPool(options,[ver_id,ver_id],function(err,results)
     {
         if( err )
         {
@@ -84,13 +88,13 @@ exports.get_app_ver = function(req,res)
             if( app_rows && app_rows.length > 0 )
             {
                 app_data = app_rows[0];
-                app_data.version = results[1][0].version;
-                
+                app_data.auto_scale_groups = results[1];
+
                 res.send(app_data);
             }
             else
             {
-                res.send("no app found: " + JSON.stringify(results));
+                res.send("<pre>error: " + JSON.stringify(results,undefined,2));
             }
         }
     });

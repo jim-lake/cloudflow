@@ -1,31 +1,20 @@
 
-var db_pool = require('../../db.js').db_pool;
+var db = require('../../db.js');
 
 exports.get_list = function(req,res)
 {
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
     
-    db_pool.getConnection(function(err, connection)
+    db.queryFromPool('SELECT * FROM environments',function(err,rows)
     {
         if( err )
         {
-            res.send("no db, try again later: " + err);
+            res.send(err);
         }
         else
         {
-            connection.query('SELECT * FROM environments', function(err, rows)
-            {
-                if( err )
-                {
-                    res.send(err);
-                }
-                else
-                {
-                    res.send(rows);
-                }
-                connection.end();
-            });
+            res.send(rows);
         }
     });
 };

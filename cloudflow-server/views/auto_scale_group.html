@@ -13,16 +13,14 @@
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
     <script src="/js/string.utils.js" type="text/javascript"></script>
     <script src="/js/ejs_production.js" type="text/javascript"></script>
-
-    <script src="/js/home.js" type="text/javascript"></script>
+    
+    <script src="/js/auto_scale_group.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var g_asg_id = <%= asg_id %>;
+    </script>
 </head>
-<body>
-    <h1>Environments</h1>
-    <div id='environment_list' class='list'></div>
-    <button>New Environment</button>
-    <hr/>
-    <h1>Applications</h1>
-    <div id='application_list' class='list'></div>
-    <button>New Application</button>
+<body id='body'>
+    
+    
 </body>
 </html>
