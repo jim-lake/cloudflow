@@ -32,7 +32,17 @@ exports.get_env = function(req,res)
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
     
-    res.send("get env not implemented");
+    db.queryFromPool('SELECT * FROM environments',function(err,rows)
+    {
+        if( err )
+        {
+            res.send(err);
+        }
+        else
+        {
+            res.send(rows);
+        }
+    });
 }
 exports.update_env = function(req,res)
 {

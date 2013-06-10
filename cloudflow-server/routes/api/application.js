@@ -70,7 +70,7 @@ exports.get_app_ver = function(req,res)
     res.header("Pragma", "no-cache");
     
     var sql = 'SELECT * FROM app_versions NATURAL JOIN applications WHERE app_version_id = ?;';
-    sql += 'SELECT * FROM auto_scale_groups NATURAL LEFT JOIN launch_configs WHERE app_version_id = ?;';
+    sql += 'SELECT * FROM auto_scale_groups WHERE app_version_id = ?;';
     
     var options = {
         sql: sql,

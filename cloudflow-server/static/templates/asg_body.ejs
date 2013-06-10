@@ -1,10 +1,71 @@
 
-<h1>Auto Scale Group</h1>
+<h1>Application: <%= app.name + " v" + app.version %></h1>
+<h3>Auto Scale Group</h3>
 <hr/>
 <div class='prop_list'>
-    <div class='line'>
+    <div class='line'><div class='contents'>
         <div class='name'>Name</div>
-        <div class='input'><input id='asg_name' value='<%= asg.name %>'/></div>
+        <div class='value'><input id='name' value='<%= asg.name %>'/></div>
+    </div></div>
+    <div class='line odd'><div class='contents'>
+        <div class='name'>AMI</div>
+        <div class='value'><input id='ami' value='<%= asg.ami %>'/></div>
+    </div></div>
+    <div class='line'><div class='contents'>
+        <div class='name'>Instance Type</div>
+        <div class='value'><input id='instance_type' value='<%= asg.instance_type %>'/></div>
+    </div></div>
+    <div class='line odd'><div class='contents'>
+        <div class='name'>Min</div>
+        <div class='value num'><input id='min' value='<%= asg.min %>'/></div>
+    </div></div>
+    <div class='line'><div class='contents'>
+        <div class='name'>Desired</div>
+        <div class='value num'><input id='desired' value='<%= asg.desired %>'/></div>
+    </div></div>
+    <div class='line odd'><div class='contents'>
+        <div class='name'>Max</div>
+        <div class='value num'><input id='max' value='<%= asg.max %>'/></div>
+    </div></div>
+    <div class='line'><div class='contents'>
+        <div class='name'>VPC or EC2</div>
+        <div class='value dropdown'>
+            <select id='ec2_or_vpc' >
+                <option <%= vpc_selected %> value='VPC'>VPC</option>
+                <option <%= ec2_selected %> value='EC2'>EC2</option>
+            </select>
+        </div></div>
     </div>
+    <div id='vpc_section' <%= vpc_section_style %> >
+        <div class='line odd'><div class='contents'>
+            <div class='name'>VPC Subnet List</div>
+            <div class='value'><input id='vpc_subnet_list' value='<%= asg.vpc_subnet_list %>'/></div>
+        </div></div>
+    </div>
+    <div id='ec2_section' <%= ec2_section_style %> >
+        <div class='line odd'><div class='contents'>
+            <div class='name'>Availability Zone List</div>
+            <div class='value'><input id='availability_zone_list' value='<%= asg.availability_zone_list %>'/></div>
+        </div>
+    </div></div>
+    <div class='line'><div class='contents'>
+        <div class='name'>Security Group List</div>
+        <div class='value'><input id='security_group_list' value='<%= asg.security_group_list %>'/></div>
+    </div></div>
+    <div class='line odd'><div class='contents'>
+        <div class='name'>Key Pair</div>
+        <div class='value'><input id='key_pair' value='<%= asg.key_pair %>'/></div>
+    </div></div>
+    <div class='line'><div class='contents'>
+        <div class='name'>IAM Role</div>
+        <div class='value'><input id='iam_role' value='<%= asg.iam_role %>'/></div>
+    </div></div>
+    <div class='line odd'><div class='contents'>
+        <div class='name'>Root Volume Size (GB)</div>
+        <div class='value num'><input id='root_volume_gb' value='<%= asg.root_volume_gb %>'/></div>
+    </div></div>
+</div>
+<div class='submit_container'>
+    <button onclick='asgSave();'>Save Auto Scale Group</button>
 </div>
 

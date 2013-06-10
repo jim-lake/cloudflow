@@ -1,0 +1,38 @@
+
+<h1>Environment: <%= env.name %></h1>
+
+<div class='app_list'>
+    <% for( var i = 0 ; i < apps.length ; ++i ) { %>
+        <div class='app' id='<%= "app_" + i %>'>
+            <div class=''>
+                <div class='app_name'><%= apps[i].name %></div>
+            </div>
+            <div class='ver_list'>
+                <% for( var j = 0 ; j < apps[i].versions.length ; j++ ) {
+                        var ver = apps[i].versions[j];
+                        var i_j = "{0},{1}".format(i,j);
+                %>
+                    <div class='ver' id='<%= "ver_" + j %>'><div class='contents'>
+                        <div class='name'><%= ver.name %></div>
+                        <div class='status'><%= ver.status %></div>
+                        <div class='action start'>
+                            <button onclick='appStart(<%= i_j %>);'>Start</button>
+                        </div>
+                        <div class='action stop'>
+                            <button onclick='appStop(<%= i_j %>);'>Stop</button>
+                        </div>
+                        <div class='action stage'>
+                            <button onclick='appStage(<%= i_j %>);'>Stage</button>
+                        </div>
+                        <div class='action cleanup'>
+                            <button onclick='appPromote(<%= i_j %>);'>Promote</button>
+                        </div>
+                        <div class='action cleanup'>
+                            <button onclick='appCleanup(<%= i_j %>);'>Cleanup</button>
+                        </div>
+                    </div></div>
+                <% } %>
+            </div>
+        </div>
+    <% } %>
+</div>

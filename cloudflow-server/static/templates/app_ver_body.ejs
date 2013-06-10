@@ -13,17 +13,15 @@
 <h3>Auto Scale Groups</h3>
 <div id='asg_list' class='list'>
     <% for( var i = 0 ; i < app.auto_scale_groups.length ; ++i ) { %>
-        <div class='line'>
-            <div class='contents'>
-                <div class='name'><%= app.auto_scale_groups[i].name %></div>
-                <div class='action edit'>
-                    <a href="<%= asgViewUrl(app.auto_scale_groups[i]) %>">Edit</a>
-                </div>
-                <div class='action delete'>
-                    <button onclick='asgDelete(<%= i %>);'>Delete</button>
-                </div>
+        <div class='line'><div class='contents'>
+            <div class='name'><%= app.auto_scale_groups[i].name %></div>
+            <div class='action edit'>
+                <a href="<%= asgViewUrl(app.auto_scale_groups[i]) %>">Edit</a>
             </div>
-        </div>
+            <div class='action delete'>
+                <button onclick='asgDelete(<%= i %>);'>Delete</button>
+            </div>
+        </div></div>
     <% } %>
 </div>
 <input id='new_asg_name'/><button onclick='asgAdd();'>Add Auto Scale Group</button>

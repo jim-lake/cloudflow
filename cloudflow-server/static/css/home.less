@@ -4,6 +4,17 @@ body {
     font-size: 14px;
     font-family: Helvetica, "Lucida Grande", Arial, sans-serif;
 }
+input {
+    padding: 5px;
+    font-size: 14px;
+    font-family: Helvetica, "Lucida Grande", Arial, sans-serif;
+    border: 1px solid #ccc;
+    outline: none;
+}
+button {
+    font-size: 14px;
+    font-family: Helvetica, "Lucida Grande", Arial, sans-serif;
+}
 
 .list {
     padding-bottom: 10px;
@@ -27,4 +38,45 @@ body {
         width: 70px;
         text-align: center;
     }
+}
+
+.prop_list {
+    display: inline-block;
+    border: 1px solid #ccc;
+    
+    .line {
+        .contents {
+            display: inline-block;
+            padding: 5px 10px 5px 10px;
+            background-color: #eee;
+            
+            .name {
+                display: inline-block;
+                width: 300px;
+                padding: 8px 0px 8px 0px;
+            }
+            .value {
+                display: inline-block;
+                width: 400px;
+                text-align: right;
+
+                input {
+                    width: 384px;
+                }
+            }
+            .value.num {
+                input {
+                    width: 50px;
+                }
+            }
+        }
+    }
+    .line.odd {
+        .contents {
+            background-color: white;
+        }
+    }
+}
+.submit_container {
+    padding-top: 20px;
 }

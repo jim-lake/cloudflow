@@ -1,5 +1,13 @@
 
 var db = require('../../db.js');
+var AWS = require('aws-sdk');
+var config = require('../../config.json');
+var async = require('async');
+
+AWS.config.update(config.aws);
+AWS.config.update({region: 'us-west-1'});
+
+var aws_asg = new AWS.AutoScaling();
 
 exports.add_asg = function(req,res)
 {
@@ -41,7 +49,6 @@ exports.get_asg = function(req,res)
     res.header("Pragma", "no-cache");
     
     var sql = "SELECT * FROM auto_scale_groups ";
-    sql += " NATURAL LEFT JOIN launch_configs ";
     sql += " NATURAL JOIN app_versions ";
     sql += " JOIN applications ON app_versions.application_id = applications.application_id ";
     sql += " WHERE auto_scale_group_id = ?;";
@@ -60,10 +67,11 @@ exports.get_asg = function(req,res)
         {
             if( results.length > 0 )
             {
-                var asg = mergeObjects(results[0].auto_scale_groups,results[0].launch_configs);
+                var asg = results[0].auto_scale_groups;
+                var app = results[0].applications;
+                app.version = results[0].app_versions.version;
                 var ret = {
-                    application: results[0].applications,
-                    app_version: results[0].app_versions,
+                    application: app,
                     auto_scale_group: asg
                 };
                 res.send(ret);
@@ -77,10 +85,36 @@ exports.get_asg = function(req,res)
 }
 exports.update_asg = function(req,res)
 {
+    var asg_id = req.params.asg_id;
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
     
-    res.send("update asg not implemented");
+    var values = {
+        name: req.param('name'),
+        ami: req.param('ami'),
+        instance_type: req.param('instance_type'),
+        min: req.param('min'),
+        desired: req.param('desired'),
+        max: req.param('max'),
+        vpc_subnet_list: req.param('vpc_subnet_list'),
+        availability_zone_list: req.param('availability_zone_list'),
+        security_group_list: req.param('security_group_list'),
+        key_pair: req.param('key_pair'),
+        iam_role: req.param('iam_role'),
+        root_volume_gb: req.param('root_volume_gb'),
+    };
+    var sql = "UPDATE auto_scale_groups SET ? WHERE auto_scale_group_id = ?";
+    db.queryFromPool(sql,[values,asg_id],function(err,result)
+    {
+        if( err )
+        {
+            res.send("failed to add asg");
+        }
+        else
+        {
+            res.send(values);
+        }
+    });
 };
 exports.delete_asg = function(req,res)
 {
@@ -101,4 +135,28 @@ exports.delete_asg = function(req,res)
         }
     });
 };
+exports.status_asg = function(req,res)
+{
+    res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header("Pragma", "no-cache");
 
+    async.parallel(
+    {
+        asg: function(callback) {
+            aws_asg.describeAutoScalingGroups({},function(err,data)
+            {
+                callback(false,{err:err,data:data});
+            });
+        },
+        launch_config: function(callback) {
+            aws_asg.describeLaunchConfigurations({},function(err,data)
+            {
+                callback(false,{err:err,data:data});
+            });
+        }
+    },
+    function(err,results) {
+        res.send(results);
+    });
+    
+};
