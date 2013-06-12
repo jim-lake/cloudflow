@@ -3,6 +3,9 @@ var db = require('../../db.js');
 var AWS = require('aws-sdk');
 var config = require('../../config.json');
 var async = require('async');
+var Memcached = require('memcached');
+
+memcached = new Memcached("cloudflow.blueskylabs.com:11211");
 
 AWS.config.update(config.aws);
 AWS.config.update({region: 'us-west-1'});
@@ -145,18 +148,42 @@ exports.status_asg = function(req,res)
         asg: function(callback) {
             aws_asg.describeAutoScalingGroups({},function(err,data)
             {
+                memcached.set("asg",data,10*60,function(err,results)
+                {
+                    console.log("err: " + JSON.stringify(err));
+                    console.log("results: " + JSON.stringify(results));
+                });
                 callback(false,{err:err,data:data});
             });
         },
         launch_config: function(callback) {
             aws_asg.describeLaunchConfigurations({},function(err,data)
             {
+                memcached.set("launch_config",data,10*60,function(){});
                 callback(false,{err:err,data:data});
             });
         }
     },
     function(err,results) {
         res.send(results);
+    });
+    
+};
+exports.status2_asg = function(req,res)
+{
+    res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header("Pragma", "no-cache");
+
+    memcached.get(["asg","launch_config"],function(err,results)
+    {
+        if( err )
+        {
+            res.send("error: " + err);
+        }
+        else
+        {
+            res.send(results);
+        }
     });
     
 };

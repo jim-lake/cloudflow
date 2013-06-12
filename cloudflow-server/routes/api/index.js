@@ -13,6 +13,7 @@ exports.addRoutes = function(app,prefix)
     app.post(prefix + '/app_ver/:ver_id',api_app.update_app_ver);
 
     app.get(prefix + '/auto_scale_group/status',api_asg.status_asg);
+    app.get(prefix + '/auto_scale_group/status2',api_asg.status2_asg);
 
     app.post(prefix + '/auto_scale_group',api_asg.add_asg);
     app.get(prefix + '/auto_scale_group/:asg_id',api_asg.get_asg);

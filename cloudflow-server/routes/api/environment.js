@@ -29,10 +29,11 @@ exports.add_env = function(req,res)
 
 exports.get_env = function(req,res)
 {
+    var env_id = req.params.env_id;
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
     
-    db.queryFromPool('SELECT * FROM environments',function(err,rows)
+    db.queryFromPool('SELECT * FROM environments WHERE environment_id = ?',env_id,function(err,rows)
     {
         if( err )
         {
@@ -40,7 +41,7 @@ exports.get_env = function(req,res)
         }
         else
         {
-            res.send(rows);
+            res.send(rows[0]);
         }
     });
 }
