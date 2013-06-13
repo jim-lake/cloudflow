@@ -1,5 +1,7 @@
 
 var db = require('../../db.js');
+var async = require('async');
+var app = require('./application.js')
 
 exports.get_list = function(req,res)
 {
@@ -33,17 +35,20 @@ exports.get_env = function(req,res)
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
     
-    db.queryFromPool('SELECT * FROM environments WHERE environment_id = ?',env_id,function(err,rows)
+    async.parallel(
     {
-        if( err )
-        {
-            res.send(err);
+        environment: function(callback) {
+            db.queryFromPool('SELECT * FROM environments WHERE environment_id = ?',env_id,callback);
+        },
+        applications: function(callback) {
+            app.getAppsForEnv(env_id,callback);
         }
-        else
-        {
-            res.send(rows[0]);
-        }
+    },
+    function(err,results) {
+        res.send(results);
     });
+    
+    
 }
 exports.update_env = function(req,res)
 {

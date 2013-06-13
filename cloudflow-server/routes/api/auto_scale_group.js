@@ -5,7 +5,7 @@ var config = require('../../config.json');
 var async = require('async');
 var Memcached = require('memcached');
 
-memcached = new Memcached("cloudflow.blueskylabs.com:11211");
+memcached = new Memcached(config.memcached);
 
 AWS.config.update(config.aws);
 AWS.config.update({region: 'us-west-1'});
@@ -143,47 +143,94 @@ exports.status_asg = function(req,res)
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
 
-    async.parallel(
+    getASGData(function(results)
     {
-        asg: function(callback) {
-            aws_asg.describeAutoScalingGroups({},function(err,data)
-            {
-                memcached.set("asg",data,10*60,function(err,results)
-                {
-                    console.log("err: " + JSON.stringify(err));
-                    console.log("results: " + JSON.stringify(results));
-                });
-                callback(false,{err:err,data:data});
-            });
-        },
-        launch_config: function(callback) {
-            aws_asg.describeLaunchConfigurations({},function(err,data)
-            {
-                memcached.set("launch_config",data,10*60,function(){});
-                callback(false,{err:err,data:data});
-            });
-        }
-    },
-    function(err,results) {
         res.send(results);
     });
     
 };
-exports.status2_asg = function(req,res)
+exports.getResourcesForEnv = function(env_id,callback)
 {
-    res.header("Cache-Control", "no-cache, no-store, must-revalidate");
-    res.header("Pragma", "no-cache");
-
-    memcached.get(["asg","launch_config"],function(err,results)
-    {
-        if( err )
-        {
-            res.send("error: " + err);
-        }
-        else
-        {
-            res.send(results);
-        }
-    });
+    var results = getASGData();
     
+    callback(false,results);
 };
+
+function getASGData(callback)
+{
+    var mc_keys = config.aws_regions.map(function(a)
+    {
+        return a + "/asg";
+    });
+
+    memcached.get(mc_keys,function(err,results)
+    {
+        var result_map = {};
+    
+        console.log("results: " + JSON.stringify(results));
+        for( var i = 0 ; i < mc_keys.length ; ++i )
+        {
+            var mc_key = mc_keys[i];
+            var aws_region = config.aws_regions[i];
+            
+            result_map[aws_region] = false;
+            
+            if( mc_key in results )
+            {
+                result_map = results[i];
+            }
+        }
+        
+        fillRegionMapWithASGData(result_map,callback);
+    });
+}
+function fillRegionMapWithASGData(result_map,callback)
+{
+    var query_array = [];
+
+    for(var region in result_map)
+    {
+        if( result_map[region] === false )
+        {
+            query_array.push(makeASGFetchFunction(region));
+        }
+    }
+    
+    if( query_array.length > 0 )
+    {
+        async.series(query_array,function(err,results)
+        {
+            for( var i = 0 ; i < results.length ; ++i )
+            {
+                mergeObjects(result_map,results[i])
+            }
+            callback(false,result_map);
+        });
+    }
+    else
+    {
+        callback(false,result_map);
+    }
+}
+function makeASGFetchFunction(region)
+{
+    return function(err,callback) {
+        console.log("region: " + region);
+        AWS.config.update({region: region});
+        
+        var my_aws_asg = new AWS.AutoScaling();
+        
+        my_aws_asg.describeAutoScalingGroups({},function(err,results)
+        {
+            memcached.set(region + "/asg",results,function(){});
+            callback(false,{region: results});
+        });
+        
+    };
+}
+
+
+
+
+
+

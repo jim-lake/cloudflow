@@ -4,5 +4,7 @@
         "user": "root",
         "password": "password",
         "database": "cloudflow"
-    }
+    },
+    "memcached": "your.memcache.server:11211",
+    "aws_regions": [ "us-west-1", "us-east-1" ]
 }

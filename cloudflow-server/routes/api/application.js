@@ -1,5 +1,7 @@
 
 var db = require('../../db.js');
+var async = require('async');
+var asg = require('./auto_scale_group.js');
 
 exports.get_list = function(req, res)
 {
@@ -105,5 +107,18 @@ exports.update_app_ver = function(req,res)
     res.header("Pragma", "no-cache");
     
     res.send("update app ver not implemented");
+};
+
+exports.getAppsForEnv = function(env_id,callback)
+{
+    async.parallel(
+    {
+        auto_scale_group: function(asg_callback) {
+            asg.getResourcesForEnv(env_id,asg_callback);
+        },
+    },
+    function(err,results) {
+        callback(err,results);
+    });
 };
 
