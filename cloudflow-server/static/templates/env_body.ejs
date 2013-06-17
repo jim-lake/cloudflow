@@ -3,17 +3,16 @@
 
 <div class='app_list'>
     <% for( var i = 0 ; i < apps.length ; ++i ) { %>
-        <div class='app' id='<%= "app_" + i %>'>
-            <div class=''>
-                <div class='app_name'><%= apps[i].name %></div>
-            </div>
+        <div class='app' id='<%= "app_" + i %>'><div class='app_contents'>
+            <div class='app_name'><%= apps[i].name %></div>
             <div class='ver_list'>
                 <% for( var j = 0 ; j < apps[i].versions.length ; j++ ) {
                         var ver = apps[i].versions[j];
                         var i_j = "{0},{1}".format(i,j);
+                        var odd = j % 2 ? "odd" : "";
                 %>
-                    <div class='ver' id='<%= "ver_" + j %>'><div class='contents'>
-                        <div class='name'><%= ver.name %></div>
+                    <div class='ver <%= odd %>' id='<%= "ver_" + j %>'><div class='ver_contents'>
+                        <div class='version_num'><%= ver.version %></div>
                         <div class='status'><%= ver.status %></div>
                         <div class='action start'>
                             <button onclick='appStart(<%= i_j %>);'>Start</button>
@@ -33,6 +32,6 @@
                     </div></div>
                 <% } %>
             </div>
-        </div>
+        </div></div>
     <% } %>
 </div>

@@ -4,13 +4,13 @@ var AWS = require('aws-sdk');
 var config = require('../../config.json');
 var async = require('async');
 var Memcached = require('memcached');
+var _ = require('underscore');
+var $ = require('jquery')
 
 memcached = new Memcached(config.memcached);
 
 AWS.config.update(config.aws);
 AWS.config.update({region: 'us-west-1'});
-
-var aws_asg = new AWS.AutoScaling();
 
 exports.add_asg = function(req,res)
 {
@@ -143,94 +143,113 @@ exports.status_asg = function(req,res)
     res.header("Cache-Control", "no-cache, no-store, must-revalidate");
     res.header("Pragma", "no-cache");
 
-    getASGData(function(results)
+    getASGData(function(err,asg_data)
     {
-        res.send(results);
+        var env_data = envDataFromASGData(asg_data);
+        
+        res.send({ asg_data:asg_data, env_data:env_data });
     });
     
 };
-exports.getResourcesForEnv = function(env_id,callback)
+exports.getAppVersionsForEnv = function(env_id,callback)
 {
-    var results = getASGData();
-    
-    callback(false,results);
+    getASGData(function(err,results)
+    {
+        var app_vers = appVerDataFromASGData(env_id,results);
+        callback(false,app_vers);
+    });
 };
 
 function getASGData(callback)
 {
-    var mc_keys = config.aws_regions.map(function(a)
+    var fetch_functions = config.aws_regions.map(function(region)
     {
-        return a + "/asg";
-    });
-
-    memcached.get(mc_keys,function(err,results)
-    {
-        var result_map = {};
-    
-        console.log("results: " + JSON.stringify(results));
-        for( var i = 0 ; i < mc_keys.length ; ++i )
-        {
-            var mc_key = mc_keys[i];
-            var aws_region = config.aws_regions[i];
-            
-            result_map[aws_region] = false;
-            
-            if( mc_key in results )
-            {
-                result_map = results[i];
-            }
+        return function(callback) {
+            getASGDataForRegion(region,callback);
         }
-        
-        fillRegionMapWithASGData(result_map,callback);
+    });
+    
+    async.parallel(fetch_functions,function(err,results)
+    {
+        callback(false,results);
     });
 }
-function fillRegionMapWithASGData(result_map,callback)
+function getASGDataForRegion(region,callback)
 {
-    var query_array = [];
-
-    for(var region in result_map)
-    {
-        if( result_map[region] === false )
-        {
-            query_array.push(makeASGFetchFunction(region));
-        }
-    }
-    
-    if( query_array.length > 0 )
-    {
-        async.series(query_array,function(err,results)
-        {
-            for( var i = 0 ; i < results.length ; ++i )
-            {
-                mergeObjects(result_map,results[i])
-            }
-            callback(false,result_map);
-        });
-    }
-    else
-    {
-        callback(false,result_map);
-    }
-}
-function makeASGFetchFunction(region)
-{
-    return function(err,callback) {
-        console.log("region: " + region);
-        AWS.config.update({region: region});
-        
-        var my_aws_asg = new AWS.AutoScaling();
-        
-        my_aws_asg.describeAutoScalingGroups({},function(err,results)
-        {
-            memcached.set(region + "/asg",results,function(){});
-            callback(false,{region: results});
-        });
-        
+    var ret = {
+        region: region
     };
+
+    var mc_key = region + "/asg";
+    memcached.get(mc_key,function(err,results)
+    {
+        if( results )
+        {
+            ret.data = results.data;
+            callback(false,ret);
+        }
+        else
+        {
+            AWS.config.update({region: region});
+            var aws_asg = new AWS.AutoScaling();
+            aws_asg.describeAutoScalingGroups({},function(err,data)
+            {
+                if( err )
+                {
+                    ret.data = false;
+                }
+                else
+                {
+                    var mc_data = {
+                        created_at: new Date(),
+                        data: data
+                    };
+                    
+                    memcached.set(mc_key,mc_data,60*60,function(){});
+                    ret.data = data;
+                }
+                callback(false,ret);
+            });
+        }
+    });
 }
+function appVerDataFromASGData(search_env_id,asg_data)
+{
+    var app_ver_map = {};
 
-
-
-
-
+    for( var i = 0 ; i < asg_data.length ; ++i )
+    {
+        var region_data = asg_data[i];
+        var region = region_data.region;
+        for( var j = 0 ; j < region_data.data.AutoScalingGroups ; ++j )
+        {
+            var asg = region_data.data.AutoScalingGroups[j];
+            var name = asg.AutoScalingGroupName;
+            
+            var ver_array = name.match(/env(\d*)app(\d*)ver(\d*)asg(\d*)/);
+            if( ver_array )
+            {
+                var env_id = parseInt(ver_array[1]);
+                var app_id = parseInt(ver_array[2]);
+                var ver_id = parseInt(ver_array[3]);
+                var asg_id = parseInt(ver_array[4]);
+                
+                if( env_id == search_env_id )
+                {
+                    var obj_data = {
+                        region: region,
+                        auto_scale_group_id: asg_id,
+                        asg_data: asg
+                    };
+                    if( !(ver_id in app_ver_map) )
+                    {
+                        app_ver_map[ver_id] = [];
+                    }
+                    app_ver_map[ver_id].append(obj_data);
+                }
+            }
+        }
+    }
+    return app_ver_map;
+}
 

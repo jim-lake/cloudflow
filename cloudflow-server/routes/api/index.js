@@ -23,6 +23,7 @@ exports.addRoutes = function(app,prefix)
     app.post(prefix + '/environment',api_env.add_env);
     app.get(prefix + '/environment/:env_id',api_env.get_env);
     app.post(prefix + '/environment/:env_id',api_env.update_env);
+    app.post(prefix + '/environment/:env_id/app_ver/:ver_id/start',api_env.start_app_ver);
 
 };
 

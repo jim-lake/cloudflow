@@ -12,6 +12,8 @@
     "aws-sdk": "*",
     "mysql": "*",
     "async": "*",
-    "memcached": "*"
+    "memcached": "*",
+    "underscore": "*",
+    "jquery": "*"
   }
 }
